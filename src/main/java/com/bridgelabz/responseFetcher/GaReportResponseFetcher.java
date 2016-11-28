@@ -61,6 +61,9 @@ public class GaReportResponseFetcher {
 				 i++;
 			}
 
+			File file1 = new File(csvFilePath + "log4j.txt");
+			if (!file1.exists())
+				file1.createNewFile();
 			// getting nextToken so that we can get all rows
 
 			/*-----------------method to write the response into the text file-------------------------*/
