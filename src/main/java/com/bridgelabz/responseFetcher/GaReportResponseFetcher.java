@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+
+import org.apache.log4j.Logger;
+
 import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.ResponseModel;
 import com.bridgelabz.model.SecretFileModel;
@@ -13,6 +16,9 @@ import com.google.api.services.analyticsreporting.v4.model.GetReportsResponse;
 import com.google.api.services.analyticsreporting.v4.model.ReportRequest;
 
 public class GaReportResponseFetcher {
+	/* Get actual class name to be printed on */
+	static Logger log = Logger.getLogger(GaReportResponseFetcher.class.getName());
+	
 	static String csvFilePath;
 
 	// creating object of InitializeAnalyticsReporting
@@ -48,8 +54,10 @@ public class GaReportResponseFetcher {
 				
 				// calling getReport method to get response
 				 response = initializeAnalyticsReportingObject.getReport(service, gaReportInputModel, nextToken,requests);
+				// taking nextToken from response 
 				 nextToken = response.getReports().get(i).getNextPageToken();
-				 System.out.println(nextToken);
+				 // printing next token 
+				// System.out.println(nextToken);
 				 i++;
 			}
 
@@ -67,7 +75,7 @@ public class GaReportResponseFetcher {
 			BufferedWriter bw = new BufferedWriter(fw);
 
 			// printing the response
-			System.out.println(response);
+			//System.out.println(response);
 
 			// assigning response into variable response JSON of
 			// GetReportsResponse type
@@ -75,6 +83,8 @@ public class GaReportResponseFetcher {
 			GetReportsResponse responsejson = response;
 
 			bw.write(responsejson.toString());
+			log.debug(responsejson.toString());
+			
 			bw.close();
 			// reading response and placing it to responseModelArrayList
 			responseModelObject = responseReaderObject.responseReader(responsejson.toString());

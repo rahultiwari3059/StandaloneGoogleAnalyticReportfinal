@@ -143,7 +143,7 @@ public class ResponseElementReader {
 						gaReportInputModel);
 			}
 			// method to create appOpen CSvfile
-			if (gaReportInputModel.getmGaID().equals(ConstantData.one)) {
+			if (gaReportInputModel.getmGaID().equals(ConstantData.two)) {
 				androidIdReAppOpen = appReOpenCsvCreatorObject.appReOpenCsvCreator(appReOpenModelArrayListObject,
 						gaReportInputModel);
 
@@ -156,7 +156,7 @@ public class ResponseElementReader {
 
 		} catch (Exception e) {
 			
-			System.out.println("there is 0 rows in response");
+			System.out.println("there is 0 rows in response for "+ gaReportInputModel.getmGaDiscription());
 			//e.printStackTrace();
 
 		}
